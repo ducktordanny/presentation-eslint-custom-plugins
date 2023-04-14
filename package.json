@@ -1,0 +1,13 @@
+{
+  "name": "presentation-eslint-custom-plugins",
+  "version": "1.0.0",
+  "author": "Daniel Lazar <lazardani0112@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "reveal-md slides.md -w --disable-auto-open",
+    "build": "rm -rf dist && reveal-md slides.md --static dist --static-dir=assets"
+  },
+  "devDependencies": {
+    "reveal-md": "^5.4.1"
+  }
+}
