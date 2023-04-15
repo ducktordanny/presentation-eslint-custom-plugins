@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>reveal-md</title>
+    <link rel="shortcut icon" href="./favicon.ico" />
+    <link rel="stylesheet" href="./dist/reset.css" />
+    <link rel="stylesheet" href="./dist/reveal.css" />
+    <link rel="stylesheet" href="./dist/theme/moon.css" id="theme" />
+    <link rel="stylesheet" href="./css/highlight/base16/zenburn.css" />
+
+    <link rel="stylesheet" href="./_assets/styles.css" />
+
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides"><section ><section data-markdown><script type="text/template"># ESLint: Custom plugins
+</script></section><section data-markdown><script type="text/template">
+## What is ESLint?
+
+Statically analyzes your code to quickly find problems.
+
+- Find issues
+- Fix automatically
+- Stricten code style
+</script></section><section data-markdown><script type="text/template">
+## Custom plugins?
+
+An extension for ESLint that adds additional rules and configuration options.
+
+!["This is custom" GIF](assets/this-is-custom.gif)
+</script></section></section><section ><section data-markdown><script type="text/template">
+## Create you own plugin
+
+!["Plugin" GIF](assets/plugin.gif)
+</script></section><section data-markdown><script type="text/template">
+## Create folder & naming
+
+Create you folder with the following naming convention:
+
+- `eslint-plugin-<plugin-name>`
+- `@<scope>/eslint-plugin-<plugin-name>`
+- `@<scope>/eslint-plugin`
+
+<aside class="notes"><p>Creating a folder is important because Yeoman won&#39;t... But details in the next slide</p>
+</aside></script></section><section data-markdown><script type="text/template">
+## Generate files
+
+Install [Yeoman generator](https://www.npmjs.com/package/generator-eslint), then use it inside your previously created folder:
+
+- `yo eslint:plugin`
+- `yo eslint:rule`
+
+!["ESLint plugin and rule structure" PNG](assets/eslint-plugin-and-rule-structure.png)
+</script></section><section data-markdown><script type="text/template">
+## You're good to go!!!
+
+Now you can:
+
+- Configure your rules -> `meta` object
+- Write you logic -> `create` function
+
+!["Meta" PNG](assets/meta.png)
+</script></section></section><section ><section data-markdown><script type="text/template">
+## Meta object?
+
+```js
+const meta = {
+  type: 'problem', // `problem`, `suggestion`, or `layout`
+  docs: {
+    description: 'Finds configured words, bad words... ¯\\_(ツ)_/¯',
+    recommended: false,
+    url: null, // URL to the documentation page for this rule
+  },
+  messages: {badThingyHappened: 'How dare you???'},
+  fixable: 'code', // Or `code` or `whitespace`
+  schema: [], // Add a schema if the rule has options
+};
+```
+</script></section><section data-markdown><script type="text/template">
+## Create function?
+</script></section></section><section  data-markdown><script type="text/template">
+## Sooo, that's it ¯\\\_(ツ)\_/¯
+
+!["K, Bye" GIF](assets/k-bye.gif)
+</script></section></div>
+    </div>
+
+    <script src="./dist/reveal.js"></script>
+
+    <script src="./plugin/markdown/markdown.js"></script>
+    <script src="./plugin/highlight/highlight.js"></script>
+    <script src="./plugin/zoom/zoom.js"></script>
+    <script src="./plugin/notes/notes.js"></script>
+    <script src="./plugin/math/math.js"></script>
+    <script>
+      function extend() {
+        var target = {};
+        for (var i = 0; i < arguments.length; i++) {
+          var source = arguments[i];
+          for (var key in source) {
+            if (source.hasOwnProperty(key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+        return target;
+      }
+
+      // default options to init reveal.js
+      var defaultOptions = {
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        slideNumber: true,
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealZoom,
+          RevealNotes,
+          RevealMath
+        ]
+      };
+
+      // options from URL query string
+      var queryOptions = Reveal().getQueryHash() || {};
+
+      var options = extend(defaultOptions, {"controls":true,"progress":true,"history":true,"center":true,"slideNumber":true}, queryOptions);
+    </script>
+
+
+    <script>
+      Reveal.initialize(options);
+    </script>
+  </body>
+</html>
