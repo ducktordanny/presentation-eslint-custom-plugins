@@ -5,9 +5,11 @@
   "license": "MIT",
   "scripts": {
     "dev": "reveal-md slides.md -w --disable-auto-open",
-    "build": "rm -rf dist && reveal-md slides.md --static dist --static-dir=assets && cp -r assets dist/assets"
+    "build": "rm -rf dist && reveal-md slides.md --static dist --static-dir=assets && cp -r assets dist/assets",
+    "deploy": "yarn build && gh-pages -d dist"
   },
   "devDependencies": {
+    "gh-pages": "^5.0.0",
     "reveal-md": "^5.4.1"
   }
 }
