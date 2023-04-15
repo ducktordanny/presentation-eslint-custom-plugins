@@ -11,15 +11,13 @@
 /** @type {import('eslint').Rule.RuleModule} */
 module.exports = {
   meta: {
-    type: 'problem', // `problem`, `suggestion`, or `layout`
+    type: null, // `problem`, `suggestion`, or `layout`
     docs: {
-      description: 'Meow',
+      description: "Finds configured words, baaaaad words... I guess ¯\\_(ツ)_/¯",
       recommended: false,
       url: null, // URL to the documentation page for this rule
     },
-    messages: {
-      badThingyHappened: 'How dare you???'
-    },
+    messages: {},
     fixable: null, // Or `code` or `whitespace`
     schema: [], // Add a schema if the rule has options
   },
