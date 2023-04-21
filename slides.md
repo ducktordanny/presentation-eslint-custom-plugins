@@ -63,24 +63,92 @@ Now you can:
 ## Meta object?
 
 ```js
-const meta = {
+meta: {
   type: 'problem', // `problem`, `suggestion`, or `layout`
   docs: {
-    description: 'Finds configured words, bad words... ¯\\_(ツ)_/¯',
+    description: 'It does something... ¯\\_(ツ)_/¯',
     recommended: false,
-    url: null, // URL to the documentation page for this rule
+    url: 'https://example.com', // documentation for the rule
   },
-  messages: {badThingyHappened: 'How dare you???'},
-  fixable: 'code', // Or `code` or `whitespace`
-  schema: [], // Add a schema if the rule has options
-};
+  messages: {badThingyHappened: 'How dare you use {{ example }}???'},
+  fixable: 'code', // Or `code` or `whitespace`,
+  schema: [
+    'so-you-need-an-option': true,
+  ], // Add a schema if the rule has options
+}
 ```
 
 ----
 
 ## Create function?
 
-Alma? yea...
+Example:
+
+```js
+create(context): {
+  ReturnStatement: function(node) {
+    // at a ReturnStatement node while going down
+  },
+  // at a function expression node while going up:
+  'FunctionExpression:exit': checkLastSegment,
+  'ArrowFunctionExpression:exit': checkLastSegment,
+  onCodePathStart: function (codePath, node) {
+    // at the start of analyzing a code path
+  },
+  onCodePathEnd: function(codePath, node) {
+    // at the end of analyzing a code path
+  }
+  // ...
+}
+```
+
+AST [astexplorer.net](https://astexplorer.net/)
+
+Note: Abstract Syntax Tree
+
+----
+
+## Report an issue
+
+- Use `context.report()` function:
+
+```js
+context.report({
+  node: node,
+  messageId: 'badThingyHappened',
+  data: {
+    example: node.name,
+  },
+})
+```
+
+----
+
+## Testing
+
+RuleTester
+
+```js
+const ruleTester = new RuleTester();
+ruleTester.run("bad-words", rule, {
+  valid: [
+    // give me some code that won't trigger a warning
+  ],
+
+  invalid: [
+    {
+      code: "const thisIsReallyReallyBadLol = 0;",
+      errors: [{ message: "Fill me in.", type: "Me too" }],
+    },
+  ],
+});
+```
+
+---
+
+## What about typescript?
+
+DEMOOOOO
 
 ---
 
